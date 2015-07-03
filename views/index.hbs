@@ -1,12 +1,31 @@
-<script>
-    var convertEmoji = function(){
-        var input = document.getElementById('editArea').innerHTML;
-        var result = emojione.shortnameToImage(input);
-        document.getElementById('editArea').innerHTML = result;
-        document.getElementById('editArea').focus();
-    }
-</script>
 <div class="container">
     <h1>Beyond Chat</h1>
-    <pre id="editArea" contenteditable="true" onkeyup="convertEmoji()"></pre>
+    <a id="aaa" href="#" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+    </a>
+    <pre id="editArea" contenteditable="true" onkeyup="convertEmoji()" onload="loadSuccess()" ></pre>
 </div>
+<script>
+    var inputControl = document.getElementById('editArea');
+
+    var convertEmoji = function(){
+        if(inputControl.innerHTML.split(":").length > 2){
+            var input = inputControl.innerHTML;
+            var result = emojione.shortnameToImage(input);
+            inputControl.innerHTML = result;
+        }
+    };
+
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    });
+
+    $('#aaa').on('shown.bs.popover', function () {
+        var expressionForm = document.getElementsByClassName("popover-content");
+        console.log(expressionForm[0]);
+        if(expressionForm != null){
+            expressionForm[0].innerHTML = emojione.shortnameToImage(":100:");
+            console.log(expressionForm[0]);
+        }
+    })
+</script>
