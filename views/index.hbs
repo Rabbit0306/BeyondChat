@@ -1,9 +1,12 @@
 <script>
     var convertEmoji = function(){
-
+        var input = document.getElementById('editArea').innerHTML;
+        var result = emojione.shortnameToImage(input);
+        document.getElementById('editArea').innerHTML = result;
+        document.getElementById('editArea').focus();
     }
 </script>
 <div class="container">
     <h1>Beyond Chat</h1>
-    <pre contenteditable="true" onchange="convertEmoji()"></pre>
+    <pre id="editArea" contenteditable="true" onkeyup="convertEmoji()"></pre>
 </div>
